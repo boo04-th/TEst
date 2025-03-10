@@ -71,3 +71,58 @@ function removeEmployeeCard(event) {
         card.remove(); // Using remove() directly to remove the card
     }
 }
+
+
+// Task 5: Inline Editing of Employee Details
+function enableEditing(card) {
+    const nameElement = card.querySelector("h3");
+    const positionElement = card.querySelector("p");
+
+    // Create input fields for name and position
+    const nameInput = document.createElement("input");
+    nameInput.type = "text";
+    nameInput.value = nameElement.textContent;
+
+    const positionInput = document.createElement("input");
+    positionInput.type = "text";
+    positionInput.value = positionElement.textContent;
+
+    // Replace the static text with the input fields
+    nameElement.replaceWith(nameInput);
+    positionElement.replaceWith(positionInput);
+
+    // Add a save button
+    const saveButton = document.createElement("button");
+    saveButton.textContent = "Save";
+    saveButton.classList.add("save-button");
+
+    saveButton.addEventListener("click", () => {
+        nameElement.textContent = nameInput.value;
+        positionElement.textContent = positionInput.value;
+
+        // Replace input fields with static text
+        nameInput.replaceWith(nameElement);
+        positionInput.replaceWith(positionElement);
+
+        // Reattach edit and remove buttons
+        const editButton = document.createElement("button");
+        editButton.textContent = "Edit";
+        editButton.classList.add("edit-btn");
+        editButton.addEventListener("click", () => enableEditing(card));
+
+        const removeButton = document.createElement("button");
+        removeButton.textContent = "Remove";
+        removeButton.classList.add("remove-btn");
+        removeButton.addEventListener("click", () => removeEmployeeCard({target: removeButton}));
+
+        // Append buttons again after saving
+        const buttonContainer = card.querySelector('.buttons');
+        buttonContainer.innerHTML = ''; // Clear existing buttons
+        buttonContainer.appendChild(editButton);
+        buttonContainer.appendChild(removeButton);
+    });
+
+    card.appendChild(saveButton);
+}
+
+
