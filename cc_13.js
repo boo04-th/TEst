@@ -45,3 +45,14 @@ document.addEventListener("DOMContentLoaded", () => {
     createEmployeeCard('Helen Phan', 'Marketing Manager');
     createEmployeeCard('Kayla La', 'Head Coach');
 });
+
+// Task 3: Converting NodeLists to Arrays for Bulk Updates
+function updateEmployeeCards() {
+    const employeeCards = document.querySelectorAll(".employee-card"); //Selecting all the employee cards on the page
+    Array.from(employeeCards).forEach(card => {// Apply a highlighting style
+        card.classList.add("highlight"); // Add a highlight class (ensure this is defined in CSS)
+    });
+}
+
+// Example usage
+updateEmployeeCards();
