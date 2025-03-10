@@ -56,3 +56,18 @@ function updateEmployeeCards() {
 
 // Example usage
 updateEmployeeCards();
+
+// Task 4 - Employee Card Removal with Event Bubbling
+document.getElementById("employeeContainer").addEventListener("click", function (event) {
+    if (event.target.closest('.employee-card')) { // When the employee card itself is clicked (excluding the remove button)
+        console.log("An employee card was clicked!");
+    }
+});
+
+function removeEmployeeCard(event) {
+    event.stopPropagation();
+    const card = event.target.closest('.employee-card');
+    if (card) {
+        card.remove(); // Using remove() directly to remove the card
+    }
+}
