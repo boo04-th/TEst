@@ -1,0 +1,47 @@
+// Task 2: Adding Employee Cards Dynamically
+function createEmployeeCard(name, position) {
+    const container = document.getElementById("employeeContainer");//Getting the main container to place employee cards
+
+    const card = document.createElement("div");//Creating a new card for the employee
+    card.classList.add("employee-card");
+
+    const nameHeading = document.createElement("h3");
+    nameHeading.textContent = name;
+
+    const positionPara = document.createElement("p");//Adding the employee's position to the card
+    positionPara.textContent = position;
+
+    const buttonContainer = document.createElement("div");
+    buttonContainer.classList.add("buttons");
+
+    const removeButton = document.createElement("button");//Adding a button to remove the employee card
+    removeButton.textContent = "Remove";
+    removeButton.classList.add("remove-btn");
+
+    const editButton = document.createElement("button");//Adding a button to edit the employee card
+    editButton.textContent = "Edit";
+    editButton.classList.add("edit-btn");
+
+    removeButton.addEventListener("click", function () {
+        container.removeChild(card);
+    });
+
+    editButton.addEventListener("click", function () {
+        enableEditing(card);
+    });
+
+    //Adding elements with clear spacing
+    buttonContainer.appendChild(removeButton);
+    buttonContainer.appendChild(editButton);
+    card.appendChild(nameHeading);
+    card.appendChild(positionPara);
+    card.appendChild(buttonContainer);
+    container.appendChild(card);
+}
+
+// Example usage
+document.addEventListener("DOMContentLoaded", () => {
+    createEmployeeCard('Jane Le', 'Software Engineer');
+    createEmployeeCard('Helen Phan', 'Marketing Manager');
+    createEmployeeCard('Kayla La', 'Head Coach');
+});
